@@ -1,0 +1,7 @@
+.hover {
+  &:hover {
+    transform: translateY(-3px);
+    background-color: rgba(#000, .1);
+    transition: all .3s;
+  }
+}

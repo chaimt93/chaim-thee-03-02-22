@@ -8,6 +8,7 @@
 <script>
 import SearchBar from "components/SearchBar";
 import CityWeather from "components/CityWeather";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "Home",

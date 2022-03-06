@@ -1,5 +1,5 @@
 <template>
-  <q-card class="col-auto q-pa-md q-ma-sm single-day-card">
+  <q-card class="col-auto q-pa-md q-ma-sm single-day-card hover">
     <div class="day-name">{{ get_single_day_name }}</div>
     <div class="day-phrase">{{ get_single_day_ShortPhrase }}</div>
     <div>{{ get_single_day_temp }}</div>
@@ -31,11 +31,7 @@ export default {
 
 <style scoped lang="scss">
 .single-day-card {
-  &:hover{
-    transform: translateY(-3px);
-    background-color: rgba(#000,.1);
-    transition: all .3s;
-  }
+
   .day-name {
     font-size: 1rem;
     font-weight: 700;

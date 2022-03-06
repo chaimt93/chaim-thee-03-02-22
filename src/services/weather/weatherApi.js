@@ -21,8 +21,9 @@ export async function weatherFetch({url}) {
     const res = await fetch(url, {
       method: "GET",
     });
-    const data = await res.json();
-    return data
+    if (res.ok) {
+      return await res.json();
+    }
   } catch (e) {
     handleError(e)
   }

@@ -6,7 +6,8 @@
           <q-img width="40px" class="q-ma-sm" src="~../assets/sun.svg"/>
         </div>
         <div class="col-grow row justify-center items-center">
-          <q-btn v-for="(btn,i) of menuBtns" :label="btn.label" color="primary" flat :to="btn.to" class="q-mx-sm" :key="i"/>
+          <q-btn v-for="(btn,i) of menuBtns" :label="btn.label" color="primary" flat :to="btn.to" class="q-mx-sm"
+                 :key="i"/>
         </div>
         <div class="col-auto">
           <p class="app-title">Weather</p>
@@ -19,7 +20,7 @@
 
 <script>
 
-import {mapState, mapMutations, mapActions} from "vuex";
+import {mapMutations} from "vuex";
 
 
 export default {
@@ -43,7 +44,7 @@ export default {
 .app-title {
   padding: 0;
   margin: 0;
-  font-size: 24px;
+  font-size: 22px;
 
 }
 

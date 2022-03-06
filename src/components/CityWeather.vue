@@ -1,8 +1,8 @@
 <template>
-  <q-card class="city-weather-card column justify-evenly" v-if="currentCity">
+  <q-card class="city-weather-card column justify-evenly q-pa-lg" v-if="currentCity">
     <q-card-section class="col-4 row items-center justify-between">
       <div class="col-auto">
-        <p class="city-name col-auto no-margin">{{ get_city_name }}</p>
+        <p class="city-name col-auto no-margin">{{ get_city_name(currentCity) }}</p>
       </div>
       <div class="col-auto">
         <q-icon :name="get_icon_name" color="primary" size="md" @click="handle_favorites_click">
@@ -12,8 +12,8 @@
     </q-card-section>
     <q-card-section class="col-4 row items-center justify-center">
       <div>
-        <p class="current-weather">{{ get_current_weather }} </p>
-        <p class="city-temperature"> {{ get_current_temperature }}</p>
+        <p class="current-weather">{{ get_current_weather(currentCity) }} </p>
+        <p class="city-temperature"> {{ get_current_temperature(currentCity) }}</p>
       </div>
 
     </q-card-section>
@@ -26,40 +26,30 @@
 <script>
 import {mapActions, mapState} from "vuex";
 import SingleDayWeather from "components/SingleDayWeather";
+import get_city_data from "src/mixins/get_city_data";
 
 export default {
   name: "CityWeather",
   components: {SingleDayWeather},
+  mixins:[get_city_data],
   methods: {
     ...mapActions('favorites', ['remove_from_favorites', 'add_to_favorites']),
     async handle_favorites_click() {
-      await this[this.isFavorite ? 'remove_from_favorites' : 'add_to_favorites'](this.currentCity)
+      await this[this.isFavorite(this.currentCity) ? 'remove_from_favorites' : 'add_to_favorites'](this.currentCity)
     },
   },
   computed: {
     ...mapState('weather', ['currentCity']),
     ...mapState('favorites', ['favorites']),
-    get_city_name() {
-      return this.currentCity?.city?.LocalizedName;
-    },
-    get_current_temperature() {
-      return this.currentCity?.current?.Temperature?.Metric?.Value + ' C'
-    },
-    get_current_weather() {
-      return this.currentCity?.current?.WeatherText
-    },
     five_days() {
       return this.currentCity?.fiveDays?.DailyForecasts
     },
     get_icon_name() {
-      return this.isFavorite ? 'favorite' : 'favorite_border';
+      return this.isFavorite(this.currentCity) ? 'favorite' : 'favorite_border';
     },
     get_tooltip_text() {
-      return this.isFavorite ? 'Remove from favorites' : 'Add to favorites';
+      return this.isFavorite(this.currentCity) ? 'Remove from favorites' : 'Add to favorites';
     },
-    isFavorite() {
-      return this.favorites.find(city => this.currentCity.city.Key === city.Key)
-    }
   },
 }
 </script>
