@@ -1,5 +1,5 @@
 export const apikey = '11GtwHX3IWSCT31zG6wfupdLM4fyHjFi';
-const baseUrl = 'http://dataservice.accuweather.com';
+const baseUrl = 'https://dataservice.accuweather.com';
 
 export const endpoints = {
   autocomplete:(text)=>`${baseUrl}/locations/v1/cities/autocomplete?apikey=${apikey}&q=${text}`,
